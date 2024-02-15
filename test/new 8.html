@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .quiz-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .question-text {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .numeric-answer-input {
+      padding: 10px;
+      font-size: 16px;
+      width: 100px;
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
+
+    .check-answer-button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .check-answer-button:hover {
+      background-color: #45a049;
+	  
+    }
+
+    .result-message {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <div class="question-text">What is the answer to this numeric question?</div>
+  <input type="number" class="numeric-answer-input" placeholder="Enter your answer">
+  <button class="check-answer-button" onclick="checkAnswer()">Check Answer</button>
+  <div class="result-message" id="resultMessage"></div>
+</div>
+
+<script>
+  function checkAnswer() {
+    var userAnswer = parseFloat(document.querySelector('.numeric-answer-input').value);
+    var correctAnswer = 42; // Replace with the actual correct answer
+
+    var resultMessage = document.getElementById('resultMessage');
+    if (!isNaN(userAnswer) && userAnswer === correctAnswer) {
+      resultMessage.textContent = "Correct!";
+      resultMessage.style.color = "#4caf50"; // Green color for correct answer
+    } else {
+      resultMessage.textContent = "Incorrect. Try again.";
+      resultMessage.style.color = "#ff0000"; // Red color for incorrect answer
+    }
+  }
+</script>
+
+</body>
+</html>
