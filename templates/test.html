@@ -1,0 +1,81 @@
+<!doctyoe html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+      src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='style.css') }} /> 
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+    <title>PracticePaper-{{quiz_name}}</title>
+  </head>
+  
+  <body>
+    <div class="row">
+      
+
+      <div class="main">
+          <div class="quiztitle">
+             <h1> {{quiz_name}} </h1>
+          </div>
+          <div>
+            {% for question in questions %}
+            <div class="question_lable">Question {{ loop.index }}</div> 
+            <div class="question_text"> {{ question['question_data'] }}</div>
+            <table class="answer_table">
+              <colgroup><col class="option_index" /></colgroup>
+              <tr id="mtq_row-1-1-1" class="mtq_clickable">  
+                <td class="option_index">
+                 <div class="option_index_number"> A </div>
+                 <div id="mtq_marker-1-1-1" class="mtq_marker mtq_wrong_marker" alt="Wrong"></div>
+                </td>
+                <td class="answer_col">
+                   <div class="option_data">{{ question['option_A']}} </div>
+                </td>
+              </tr>
+              <tr id="mtq_row-1-1-2" class="mtq_clickable">  
+                <td class="option_index">
+                 <div class="option_index_number"> B </div>
+                </td>
+                <td class="answer_col">
+                   <div class="option_data">{{ question['option_B']}} </div>
+                </td>
+              </tr>
+
+              <tr id="mtq_row-1-1-3" class="mtq_clickable">  
+                <td class="option_index">
+                 <div class="option_index_number"> C </div>
+                </td>
+                <td class="answer_col">
+                   <div class="option_data">{{ question['option_C']}} </div>
+                </td>
+              </tr>
+            </table>
+
+            <div> <a href="{{ url_for('lsit_ques', quiz_name=question['year'].replace(' ','-')) }}"> {{question['year']}}</a>
+             </div>
+                <div>{{question['Answer_data']}}
+              {% endfor %}
+              </div>
+      </div>
+    </div> 
+      <div class="side">
+        <h2>About Me this is update</h2>
+        <h5>Photo of me:</h5>
+      </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
+
+  

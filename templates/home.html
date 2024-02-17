@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='style.css' ) }} />
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="left-div">
+      <div class="quiztitle">
+        <h1> {{quiz_name}} </h1>
+      </div>
+      <div class="allquestionarea">
+        {% for question in questions %}
+        <div class="question">
+          <table class="question_heading_table">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="question_lable">Question {{ loop.index }}</div>
+                  <div class="mtq_stamp"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="question_text"> {{ question['question'] }}</div>
+          {% if (question['question_type'] ==1 or question['question_type']==2) %}
+
+          <table class="answer_table" data-value="{{ question['number_correct'] }}">
+            <colgroup>
+              <col class="option_index">
+            </colgroup>
+            <tbody>
+              {% if 'answers' in question%}
+              {% for answer in question['answers'] %}
+              {% if answer['correct'] == "1" %}
+              {% set markerclass = "mtq_correct_marker" %}
+              {% set alt="Correct" %}
+              {% else %}
+              {% set markerclass = "mtq_wrong_marker" %}
+              {% set alt="Wrong" %}
+              {% endif %}
+
+              <tr id="mtq_row-1-1-1" class="mtq_clickable" data-value="{{answer['correct']}}">
+                <td class="option_lable">
+                  <div id="mtq_button-1-1-1" class="option_index_number"> {{ 'ABCDEFG'[loop.index0] }} </div>
+                  <div id="mtq_marker-1-1-1" class="{{markerclass}}" alt="{{alt}}"></div>
+                </td>
+                <td class="answer_col">
+                  <div class="option_data">{{answer['answer']}}</div>
+                </td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+            </tbody>
+          </table>
+          {% endif %}
+          {% if question['question_type'] ==3 %}
+          {% set minval=question['answers'][0].get('minval')%}
+          {% set maxval=question['answers'][0].get('maxval')%}
+          <div class="numericans">
+            <input type="number" id="ques-4" class="numinputbox">
+            <input type="button" class="checkansbtn" value="Check Answer" data-value1="{{minval}}"
+              data-value2="{{maxval}}">
+            <div class="result-message" id="resultMessage"></div>
+          </div>
+
+          {% endif %}
+        </div>
+        {% endfor %}
+
+      </div>
+      </div>
+      <div class="right-div">
+        <!-- Content for the right side -->
+        <h1>Right Side</h1>
+        <p>This is the content for the fixed-width right side.</p>
+      </div>
+    </div>
+
+</body>
+<script src="{{ url_for('static', filename='myjs.js') }}"></script>
+
+</html>
